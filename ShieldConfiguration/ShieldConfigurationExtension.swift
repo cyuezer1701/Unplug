@@ -3,25 +3,29 @@ import ManagedSettingsUI
 import UIKit
 
 class ShieldConfigurationExtension: ShieldConfigurationDataSource {
+    private let defaults = UserDefaults(suiteName: "group.io.unplug.app")
+    private let sageGreen = UIColor(red: 0.56, green: 0.74, blue: 0.56, alpha: 1)
+
     override func configuration(
         shielding application: Application
     ) -> ShieldConfiguration {
-        // Phase 2: Custom shield UI with Unplug branding
-        ShieldConfiguration(
+        let limitMinutes = defaults?.integer(forKey: "dailyScrollLimitMinutes") ?? 60
+
+        return ShieldConfiguration(
             backgroundBlurStyle: .systemUltraThinMaterial,
             title: ShieldConfiguration.Label(
                 text: "Time for a break!",
-                color: UIColor(red: 0.56, green: 0.74, blue: 0.56, alpha: 1)
+                color: sageGreen
             ),
             subtitle: ShieldConfiguration.Label(
-                text: "You've been scrolling. Try something else?",
+                text: "You've reached your \(limitMinutes)-minute limit. Try something different?",
                 color: .secondaryLabel
             ),
             primaryButtonLabel: ShieldConfiguration.Label(
-                text: "Show Alternative",
+                text: "Open Unplug",
                 color: .white
             ),
-            primaryButtonBackgroundColor: UIColor(red: 0.56, green: 0.74, blue: 0.56, alpha: 1),
+            primaryButtonBackgroundColor: sageGreen,
             secondaryButtonLabel: ShieldConfiguration.Label(
                 text: "Dismiss",
                 color: .secondaryLabel

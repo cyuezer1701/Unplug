@@ -38,14 +38,20 @@ final class HomeViewModel {
         async let sessionsTask = firestoreService.getTodaySessions(userId: userId)
         async let streakTask = firestoreService.getStreak(userId: userId, type: .checkIn)
         async let moodsTask = firestoreService.getRecentMoods(userId: userId, limit: 1)
+        async let achievementsTask = firestoreService.getAchievements(userId: userId)
+        async let challengesTask = firestoreService.getActiveChallenges(userId: userId)
 
         do {
             let sessions = try await sessionsTask
             let streak = try await streakTask
             let moods = try await moodsTask
+            let achievements = try await achievementsTask
+            let challenges = try await challengesTask
 
             appState.todaySessions = sessions
             appState.currentStreak = streak
+            appState.achievements = achievements
+            appState.activeChallenges = challenges
 
             todaySessionCount = sessions.count
             todayScreenTimeMinutes = sessions.reduce(0) { $0 + $1.durationMinutes }

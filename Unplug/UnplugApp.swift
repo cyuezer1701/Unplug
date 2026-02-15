@@ -38,6 +38,18 @@ struct RootView: View {
     }
 
     private func initializeApp() async {
+        guard FirebaseConfig.isConfigured else {
+            // Offline mode (CI or no Firebase)
+            if UserPreferences.shared.hasCompletedOnboarding {
+                appState.currentUser = UnplugUser(
+                    id: UserPreferences.shared.userId ?? UUID().uuidString,
+                    onboardingCompleted: true
+                )
+            }
+            appState.isLoading = false
+            return
+        }
+
         authService.startListening()
         do {
             let firebaseUser = try await authService.signInAnonymously()

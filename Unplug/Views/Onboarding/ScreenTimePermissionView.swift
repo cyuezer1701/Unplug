@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ScreenTimePermissionView: View {
     let state: OnboardingState
+    @State private var isRequesting = false
+    private let screenTimeService = ScreenTimeService()
 
     var body: some View {
         VStack(spacing: UnplugTheme.Spacing.xl) {
@@ -12,22 +14,21 @@ struct ScreenTimePermissionView: View {
                 .foregroundStyle(UnplugTheme.Colors.primarySage)
 
             VStack(spacing: UnplugTheme.Spacing.md) {
-                Text("Screen Time Access")
+                Text(String(localized: "onboarding.screentime.title"))
                     .font(.unplugHeadline())
                     .multilineTextAlignment(.center)
 
-                Text("To detect when you're doom-scrolling, Unplug needs access to your Screen Time data. This stays on your device.")
+                Text(String(localized: "onboarding.screentime.description"))
                     .font(.unplugBody())
                     .foregroundStyle(UnplugTheme.Colors.textSecondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, UnplugTheme.Spacing.lg)
             }
 
-            // Privacy callout
             HStack(spacing: UnplugTheme.Spacing.sm) {
                 Image(systemName: "lock.shield.fill")
                     .foregroundStyle(UnplugTheme.Colors.primarySage)
-                Text("Your data never leaves your device. We can't see which apps you use.")
+                Text(String(localized: "onboarding.screentime.privacy"))
                     .font(.unplugCaption())
                     .foregroundStyle(UnplugTheme.Colors.textSecondary)
             }
@@ -41,22 +42,33 @@ struct ScreenTimePermissionView: View {
             Spacer()
 
             VStack(spacing: UnplugTheme.Spacing.sm) {
-                UnplugButton(title: "Allow Screen Time Access") {
-                    // Phase 2: Actual FamilyControls authorization
-                    state.screenTimePermissionGranted = true
-                    state.advance()
+                UnplugButton(
+                    title: String(localized: "onboarding.screentime.allow"),
+                    isLoading: isRequesting
+                ) {
+                    requestAccess()
                 }
 
                 Button {
                     state.advance()
                 } label: {
-                    Text("Skip for now")
+                    Text(String(localized: "onboarding.screentime.skip"))
                         .font(.unplugCallout())
                         .foregroundStyle(UnplugTheme.Colors.textSecondary)
                 }
             }
             .padding(.horizontal, UnplugTheme.Spacing.lg)
             .padding(.bottom, UnplugTheme.Spacing.xxl)
+        }
+    }
+
+    private func requestAccess() {
+        isRequesting = true
+        Task {
+            let granted = (try? await screenTimeService.requestAuthorization()) ?? false
+            state.screenTimePermissionGranted = granted
+            isRequesting = false
+            state.advance()
         }
     }
 }

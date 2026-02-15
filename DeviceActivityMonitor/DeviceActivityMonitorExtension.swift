@@ -1,14 +1,20 @@
 import DeviceActivity
+import Foundation
+import ManagedSettings
 
 class DeviceActivityMonitorExtension: DeviceActivityMonitor {
+    private let store = ManagedSettingsStore()
+    private let defaults = UserDefaults(suiteName: "group.io.unplug.app")
+
     override func intervalDidStart(for activity: DeviceActivityName) {
         super.intervalDidStart(for: activity)
-        // Phase 2: Implement monitoring logic
+        defaults?.set(true, forKey: "isMonitoringActive")
     }
 
     override func intervalDidEnd(for activity: DeviceActivityName) {
         super.intervalDidEnd(for: activity)
-        // Phase 2: Implement cleanup
+        defaults?.set(false, forKey: "isMonitoringActive")
+        store.clearAllSettings()
     }
 
     override func eventDidReachThreshold(
@@ -16,6 +22,9 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
         activity: DeviceActivityName
     ) {
         super.eventDidReachThreshold(event, activity: activity)
-        // Phase 2: Trigger intervention
+        defaults?.set(Date.now.timeIntervalSince1970, forKey: "lastThresholdReached")
+
+        // Shield all apps when scroll limit reached
+        store.shield.applications = .all()
     }
 }

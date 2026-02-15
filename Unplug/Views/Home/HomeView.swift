@@ -47,6 +47,59 @@ struct HomeView: View {
                         }
                     }
 
+                    // Achievements preview
+                    if !appState.achievements.isEmpty {
+                        NavigationLink {
+                            AchievementGalleryView()
+                        } label: {
+                            UnplugCard {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: UnplugTheme.Spacing.xs) {
+                                        Text(String(localized: "home.achievements"))
+                                            .font(.unplugCaption())
+                                            .foregroundStyle(UnplugTheme.Colors.textSecondary)
+                                        HStack(spacing: UnplugTheme.Spacing.xs) {
+                                            ForEach(appState.achievements.prefix(3)) { achievement in
+                                                Image(systemName: achievement.iconName)
+                                                    .font(.title3)
+                                                    .foregroundStyle(UnplugTheme.Colors.primarySage)
+                                            }
+                                        }
+                                    }
+                                    Spacer()
+                                    Text("\(appState.achievements.count)/\(AchievementType.allCases.count)")
+                                        .font(.unplugSubheadline())
+                                        .foregroundStyle(UnplugTheme.Colors.textSecondary)
+                                    Image(systemName: "chevron.right")
+                                        .font(.caption)
+                                        .foregroundStyle(UnplugTheme.Colors.textSecondary)
+                                }
+                            }
+                        }
+                    }
+
+                    // Active challenge progress
+                    if let challenge = appState.activeChallenges.first {
+                        NavigationLink {
+                            ChallengeListView()
+                        } label: {
+                            UnplugCard {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: UnplugTheme.Spacing.xs) {
+                                        Text(String(localized: "home.challenge"))
+                                            .font(.unplugCaption())
+                                            .foregroundStyle(UnplugTheme.Colors.textSecondary)
+                                        Text(challenge.title)
+                                            .font(.unplugCallout())
+                                            .foregroundStyle(UnplugTheme.Colors.textPrimary)
+                                    }
+                                    Spacer()
+                                    ProgressRing(progress: challenge.progress, lineWidth: 5, size: 44)
+                                }
+                            }
+                        }
+                    }
+
                     // Mood check-in
                     if let lastMood = homeViewModel.lastMood,
                        Calendar.current.isDateInToday(lastMood.createdAt) {
@@ -184,6 +237,35 @@ struct HomeView: View {
                 )
                 appState.currentStreak = newStreak
                 try? await firestoreService.saveStreak(newStreak)
+            }
+
+            // Check achievements
+            let existingTypes = Set(appState.achievements.map(\.type))
+            let newTypes = AchievementChecker.checkAll(
+                sessions: appState.todaySessions,
+                streakCount: appState.currentStreak?.currentCount ?? 0,
+                userTriggers: appState.currentUser?.triggers ?? [],
+                existingTypes: existingTypes,
+                hasBuddy: false
+            )
+            for type in newTypes {
+                let achievement = AchievementChecker.createAchievement(type: type, userId: userId)
+                try? await firestoreService.saveAchievement(achievement)
+                appState.achievements.append(achievement)
+            }
+
+            // Update active challenge progress
+            for i in appState.activeChallenges.indices {
+                let progress = ChallengeManager.calculateProgress(
+                    challenge: appState.activeChallenges[i],
+                    sessions: appState.todaySessions,
+                    moods: appState.recentMoodEntries
+                )
+                appState.activeChallenges[i].progress = progress
+                if progress >= 1.0 {
+                    appState.activeChallenges[i].completedDate = .now
+                }
+                try? await firestoreService.updateChallengeProgress(appState.activeChallenges[i], userId: userId)
             }
         }
     }
