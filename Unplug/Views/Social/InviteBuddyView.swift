@@ -85,7 +85,10 @@ struct InviteBuddyView: View {
                     Task {
                         guard let userId = appState.currentUser?.id else { return }
                         let success = await viewModel.connectWithCode(userId: userId)
-                        if success { dismiss() }
+                        if success {
+                            HapticService.notification(.success)
+                            dismiss()
+                        }
                     }
                 }
             }

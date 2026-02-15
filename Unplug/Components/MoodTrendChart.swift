@@ -52,6 +52,14 @@ struct MoodTrendChart: View {
             }
         }
         .frame(height: 180)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(chartAccessibilityLabel)
+    }
+
+    private var chartAccessibilityLabel: String {
+        guard !data.isEmpty else { return "Mood trend chart, no data" }
+        let avg = data.reduce(0.0) { $0 + $1.value } / Double(data.count)
+        return "Mood trend chart, \(data.count) days, average mood \(String(format: "%.1f", avg)) out of 5"
     }
 
     private func moodEmoji(for level: Int) -> String {

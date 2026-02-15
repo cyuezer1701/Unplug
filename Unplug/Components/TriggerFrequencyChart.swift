@@ -30,5 +30,13 @@ struct TriggerFrequencyChart: View {
             }
         }
         .frame(height: CGFloat(max(data.count, 1)) * 40)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(chartAccessibilityLabel)
+    }
+
+    private var chartAccessibilityLabel: String {
+        guard !data.isEmpty else { return "Trigger frequency chart, no data" }
+        let items = data.prefix(3).map { "\($0.trigger.displayName) \($0.count) times" }
+        return "Trigger frequency chart: \(items.joined(separator: ", "))"
     }
 }

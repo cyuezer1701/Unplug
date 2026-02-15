@@ -31,6 +31,9 @@ struct OnboardingContainerView: View {
                 }
             }
             .animation(.unplugSpring, value: onboardingState.currentStep)
+            .onChange(of: onboardingState.currentStep) {
+                HapticService.impact(.light)
+            }
         }
         .unplugBackground()
     }

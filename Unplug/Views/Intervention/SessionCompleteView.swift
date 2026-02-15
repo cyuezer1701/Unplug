@@ -66,6 +66,7 @@ struct SessionCompleteView: View {
                     title: String(localized: "intervention.complete.save"),
                     isDisabled: state.moodAfter == 0
                 ) {
+                    HapticService.notification(.success)
                     withAnimation(.unplugSpring) {
                         state.complete()
                     }
@@ -75,6 +76,7 @@ struct SessionCompleteView: View {
             }
         }
         .onAppear {
+            HapticService.notification(.success)
             withAnimation(.unplugBounce.delay(0.2)) {
                 showConfetti = true
             }

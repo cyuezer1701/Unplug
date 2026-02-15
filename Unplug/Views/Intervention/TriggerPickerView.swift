@@ -33,6 +33,7 @@ struct TriggerPickerView: View {
                             trigger: trigger,
                             isSelected: state.selectedTrigger == trigger
                         ) {
+                            HapticService.selection()
                             withAnimation(.unplugSpring) {
                                 state.selectTrigger(trigger)
                             }

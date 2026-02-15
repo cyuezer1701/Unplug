@@ -27,6 +27,7 @@ struct AlternativeListView: View {
                 VStack(spacing: UnplugTheme.Spacing.sm) {
                     ForEach(alternatives) { alternative in
                         AlternativeCard(alternative: alternative) {
+                            HapticService.selection()
                             withAnimation(.unplugSpring) {
                                 state.selectAlternative(alternative)
                                 state.advance()

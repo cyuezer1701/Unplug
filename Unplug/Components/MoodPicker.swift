@@ -15,6 +15,7 @@ struct MoodPicker: View {
         HStack(spacing: UnplugTheme.Spacing.md) {
             ForEach(moods, id: \.level) { mood in
                 Button {
+                    HapticService.selection()
                     withAnimation(.unplugSpring) {
                         selectedMood = mood.level
                     }
