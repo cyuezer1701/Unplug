@@ -37,6 +37,8 @@ final class SettingsViewModel {
         appState.todaySessions = []
         appState.currentStreak = nil
         appState.recentMoodEntries = []
+        appState.activeChallenges = []
+        appState.achievements = []
     }
 
     func resetApp(authService: AuthService, appState: AppState) async throws {
@@ -44,5 +46,7 @@ final class SettingsViewModel {
         UserPreferences.shared.hasCompletedOnboarding = false
         UserPreferences.shared.userId = nil
         UserPreferences.shared.dailyScrollLimitMinutes = 60
+        // Trigger re-initialization (re-auth with Firebase)
+        appState.isLoading = true
     }
 }

@@ -32,7 +32,8 @@ struct RootView: View {
                 MainTabView()
             }
         }
-        .task {
+        .task(id: appState.isLoading) {
+            guard appState.isLoading else { return }
             await initializeApp()
         }
     }
