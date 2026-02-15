@@ -12,35 +12,48 @@ final class FirestoreService {
         return firestore
     }()
 
+    /// Returns the Firestore instance or throws if Firebase is not configured.
+    /// This prevents crashes when GoogleService-Info.plist is missing (CI, first launch).
+    private func requireDB() throws -> Firestore {
+        guard FirebaseConfig.isConfigured else {
+            throw FirestoreError.notConfigured
+        }
+        return db
+    }
+
+    enum FirestoreError: Error {
+        case notConfigured
+    }
+
     // MARK: - User
 
     func createUser(_ user: UnplugUser) async throws {
         guard let userId = user.id else { return }
-        try db.collection("users").document(userId).setData(from: user)
+        try requireDB().collection("users").document(userId).setData(from: user)
     }
 
     func getUser(id: String) async throws -> UnplugUser? {
-        let doc = try await db.collection("users").document(id).getDocument()
+        let doc = try await requireDB().collection("users").document(id).getDocument()
         return try? doc.data(as: UnplugUser.self)
     }
 
     func updateUser(_ user: UnplugUser) async throws {
         guard let userId = user.id else { return }
-        try db.collection("users").document(userId).setData(from: user, merge: true)
+        try requireDB().collection("users").document(userId).setData(from: user, merge: true)
     }
 
     // MARK: - Mood Entries
 
     func saveMoodEntry(_ entry: MoodEntry) async throws {
-        guard let userId = entry.userId as String? else { return }
-        try db.collection("users")
+        let userId = entry.userId
+        try requireDB().collection("users")
             .document(userId)
             .collection("moods")
             .addDocument(from: entry)
     }
 
     func getRecentMoods(userId: String, limit: Int = 7) async throws -> [MoodEntry] {
-        let snapshot = try await db.collection("users")
+        let snapshot = try await requireDB().collection("users")
             .document(userId)
             .collection("moods")
             .order(by: "createdAt", descending: true)
@@ -53,7 +66,7 @@ final class FirestoreService {
     // MARK: - Streaks
 
     func getStreak(userId: String, type: StreakType) async throws -> Streak? {
-        let snapshot = try await db.collection("users")
+        let snapshot = try await requireDB().collection("users")
             .document(userId)
             .collection("streaks")
             .whereField("type", isEqualTo: type.rawValue)
@@ -64,6 +77,7 @@ final class FirestoreService {
     }
 
     func saveStreak(_ streak: Streak) async throws {
+        let db = try requireDB()
         if let streakId = streak.id {
             try db.collection("users")
                 .document(streak.userId)
@@ -79,7 +93,7 @@ final class FirestoreService {
     }
 
     func getAllStreaks(userId: String) async throws -> [Streak] {
-        let snapshot = try await db.collection("users")
+        let snapshot = try await requireDB().collection("users")
             .document(userId)
             .collection("streaks")
             .getDocuments()
@@ -90,7 +104,7 @@ final class FirestoreService {
     // MARK: - Scroll Sessions
 
     func saveSession(_ session: ScrollSession) async throws {
-        try db.collection("users")
+        try requireDB().collection("users")
             .document(session.userId)
             .collection("sessions")
             .addDocument(from: session)
@@ -98,7 +112,7 @@ final class FirestoreService {
 
     func getTodaySessions(userId: String) async throws -> [ScrollSession] {
         let startOfToday = Calendar.current.startOfDay(for: .now)
-        let snapshot = try await db.collection("users")
+        let snapshot = try await requireDB().collection("users")
             .document(userId)
             .collection("sessions")
             .whereField("startedAt", isGreaterThanOrEqualTo: startOfToday)
@@ -109,7 +123,7 @@ final class FirestoreService {
     }
 
     func getSessions(userId: String, from: Date, to: Date) async throws -> [ScrollSession] {
-        let snapshot = try await db.collection("users")
+        let snapshot = try await requireDB().collection("users")
             .document(userId)
             .collection("sessions")
             .whereField("startedAt", isGreaterThanOrEqualTo: from)
@@ -123,7 +137,7 @@ final class FirestoreService {
     // MARK: - Mood Entries (Date Range)
 
     func getMoods(userId: String, from: Date, to: Date) async throws -> [MoodEntry] {
-        let snapshot = try await db.collection("users")
+        let snapshot = try await requireDB().collection("users")
             .document(userId)
             .collection("moods")
             .whereField("createdAt", isGreaterThanOrEqualTo: from)
@@ -137,14 +151,14 @@ final class FirestoreService {
     // MARK: - Achievements
 
     func saveAchievement(_ achievement: Achievement) async throws {
-        try db.collection("users")
+        try requireDB().collection("users")
             .document(achievement.userId)
             .collection("achievements")
             .addDocument(from: achievement)
     }
 
     func getAchievements(userId: String) async throws -> [Achievement] {
-        let snapshot = try await db.collection("users")
+        let snapshot = try await requireDB().collection("users")
             .document(userId)
             .collection("achievements")
             .getDocuments()
@@ -155,6 +169,7 @@ final class FirestoreService {
     // MARK: - Challenges
 
     func saveChallenge(_ challenge: Challenge, userId: String) async throws {
+        let db = try requireDB()
         if let challengeId = challenge.id {
             try db.collection("users")
                 .document(userId)
@@ -170,7 +185,7 @@ final class FirestoreService {
     }
 
     func getActiveChallenges(userId: String) async throws -> [Challenge] {
-        let snapshot = try await db.collection("users")
+        let snapshot = try await requireDB().collection("users")
             .document(userId)
             .collection("challenges")
             .whereField("isActive", isEqualTo: true)
@@ -181,7 +196,7 @@ final class FirestoreService {
 
     func updateChallengeProgress(_ challenge: Challenge, userId: String) async throws {
         guard let challengeId = challenge.id else { return }
-        try db.collection("users")
+        try requireDB().collection("users")
             .document(userId)
             .collection("challenges")
             .document(challengeId)
@@ -191,6 +206,7 @@ final class FirestoreService {
     // MARK: - Invite Codes
 
     func generateInviteCode(userId: String) async throws -> String {
+        let db = try requireDB()
         let characters = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
         var code: String
         var exists = true
@@ -207,7 +223,7 @@ final class FirestoreService {
     }
 
     func lookupInviteCode(_ code: String) async throws -> String? {
-        let doc = try await db.collection("inviteCodes").document(code.uppercased()).getDocument()
+        let doc = try await requireDB().collection("inviteCodes").document(code.uppercased()).getDocument()
         guard let inviteCode = try? doc.data(as: InviteCode.self), !inviteCode.isUsed else {
             return nil
         }
@@ -215,7 +231,7 @@ final class FirestoreService {
     }
 
     func markInviteCodeUsed(_ code: String) async throws {
-        try await db.collection("inviteCodes").document(code.uppercased()).updateData([
+        try await requireDB().collection("inviteCodes").document(code.uppercased()).updateData([
             "isUsed": true,
         ])
     }
@@ -223,6 +239,7 @@ final class FirestoreService {
     // MARK: - Buddies
 
     func addBuddy(userId: String, buddyId: String) async throws {
+        let db = try requireDB()
         let userBuddy = BuddyInfo(userId: buddyId)
         let buddyEntry = BuddyInfo(userId: userId)
 
@@ -236,7 +253,7 @@ final class FirestoreService {
     }
 
     func getBuddies(userId: String) async throws -> [BuddyInfo] {
-        let snapshot = try await db.collection("users")
+        let snapshot = try await requireDB().collection("users")
             .document(userId)
             .collection("buddies")
             .getDocuments()
