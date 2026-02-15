@@ -3,6 +3,7 @@ import SwiftUI
 struct AlternativeListView: View {
     let state: InterventionState
     @State private var alternatives: [Alternative] = []
+    @State private var weather: WeatherCondition?
 
     var body: some View {
         VStack(spacing: UnplugTheme.Spacing.lg) {
@@ -51,9 +52,11 @@ struct AlternativeListView: View {
             }
             .padding(.bottom, UnplugTheme.Spacing.xl)
         }
-        .onAppear {
+        .task {
+            let contextService = ContextService()
+            weather = await contextService.getCurrentWeather()
             if let trigger = state.selectedTrigger {
-                alternatives = AlternativeSuggester.suggest(trigger: trigger)
+                alternatives = AlternativeSuggester.suggest(trigger: trigger, weather: weather)
             }
         }
     }

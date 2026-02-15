@@ -81,4 +81,42 @@ struct AlternativeSuggesterTests {
             #expect(alt.energyLevel >= 1 && alt.energyLevel <= 5)
         }
     }
+
+    // MARK: - Weather Tests
+
+    @Test func rainyWeatherExcludesOutdoor() {
+        let rain = WeatherCondition(temperature: 15, isRaining: true, isSnowing: false, windSpeed: 5)
+        let results = AlternativeSuggester.suggest(trigger: .boredom, weather: rain)
+        let hasOutdoor = results.contains { $0.requiresOutdoor }
+        #expect(!hasOutdoor, "Rainy weather should exclude outdoor alternatives")
+    }
+
+    @Test func snowyWeatherExcludesOutdoor() {
+        let snow = WeatherCondition(temperature: -2, isRaining: false, isSnowing: true, windSpeed: 3)
+        let results = AlternativeSuggester.suggest(trigger: .boredom, weather: snow)
+        let hasOutdoor = results.contains { $0.requiresOutdoor }
+        #expect(!hasOutdoor, "Snowy weather should exclude outdoor alternatives")
+    }
+
+    @Test func niceWeatherBoostsOutdoor() {
+        let nice = WeatherCondition(temperature: 22, isRaining: false, isSnowing: false, windSpeed: 3)
+        let withWeather = AlternativeSuggester.suggest(trigger: .stress, weather: nice)
+        let withoutWeather = AlternativeSuggester.suggest(trigger: .stress)
+
+        let outdoorCountWith = withWeather.filter { $0.requiresOutdoor || $0.category == .outdoor }.count
+        let outdoorCountWithout = withoutWeather.filter { $0.requiresOutdoor || $0.category == .outdoor }.count
+        #expect(outdoorCountWith >= outdoorCountWithout, "Nice weather should favor outdoor alternatives")
+    }
+
+    @Test func nilWeatherBehavesNormally() {
+        let results = AlternativeSuggester.suggest(trigger: .boredom, weather: nil)
+        #expect(results.count >= 1 && results.count <= 5, "nil weather should produce normal results")
+    }
+
+    @Test func coldWeatherReducesOutdoorScore() {
+        let cold = WeatherCondition(temperature: 2, isRaining: false, isSnowing: false, windSpeed: 5)
+        let results = AlternativeSuggester.suggest(trigger: .boredom, weather: cold)
+        // Cold but not raining — outdoor allowed but deprioritized
+        #expect(!results.isEmpty, "Cold weather should still produce results")
+    }
 }

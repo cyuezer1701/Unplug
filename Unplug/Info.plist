@@ -12,5 +12,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Unplug uses your location to suggest weather-appropriate activities when you need a break from scrolling.</string>
 </dict>
 </plist>

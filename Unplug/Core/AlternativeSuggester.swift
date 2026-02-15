@@ -69,20 +69,22 @@ enum AlternativeSuggester {
     static func suggest(
         trigger: Trigger,
         timeOfDay: Date = .now,
-        energyLevel: Int = 3
+        energyLevel: Int = 3,
+        weather: WeatherCondition? = nil
     ) -> [Alternative] {
         let time = TimeOfDay(from: timeOfDay)
         let affinityMap = categoryAffinity(for: trigger)
 
         let scored = catalog
-            .filter { passesFilters($0, time: time) }
+            .filter { passesFilters($0, time: time, weather: weather) }
             .map { alternative -> (Alternative, Double) in
-                let score = calculateScore(
+                var score = calculateScore(
                     alternative: alternative,
                     affinityMap: affinityMap,
                     energyLevel: energyLevel,
                     time: time
                 )
+                score += weatherBonus(for: alternative, weather: weather)
                 return (alternative, score)
             }
             .sorted { $0.1 > $1.1 }
@@ -92,11 +94,28 @@ enum AlternativeSuggester {
 
     // MARK: - Private
 
-    private static func passesFilters(_ alt: Alternative, time: TimeOfDay) -> Bool {
+    private static func passesFilters(_ alt: Alternative, time: TimeOfDay, weather: WeatherCondition? = nil) -> Bool {
         if alt.requiresOutdoor && time == .night {
             return false
         }
+        if let weather, alt.requiresOutdoor && (weather.isRaining || weather.isSnowing) {
+            return false
+        }
         return true
+    }
+
+    private static func weatherBonus(for alt: Alternative, weather: WeatherCondition?) -> Double {
+        guard let weather else { return 0 }
+
+        if weather.isNiceWeather && (alt.requiresOutdoor || alt.category == .outdoor) {
+            return 2.0
+        }
+
+        if weather.temperature < 5 && alt.requiresOutdoor {
+            return -2.0
+        }
+
+        return 0
     }
 
     private static func calculateScore(
