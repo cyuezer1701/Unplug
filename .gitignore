@@ -1,13 +1,48 @@
-# Dependencies
-node_modules/
+# Xcode
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+DerivedData/
+build/
+.build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
 
-# Build output
-dist/
+# Swift Package Manager
+.swiftpm/
+Packages/
+Package.pins
+Package.resolved
 
-# Environment variables
+# CocoaPods (safety)
+Pods/
+
+# Firebase
+GoogleService-Info.plist
+.firebase/
+.firebaserc
+
+# Environment
 .env
 .env.local
 .env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.app
+*.xcarchive
 
 # IDE
 .vscode/
@@ -16,17 +51,8 @@ dist/
 *.swo
 *~
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Firebase
-.firebase/
-.firebaserc
+# Logs
+*.log
 
 # Coverage
 coverage/
-
-# Logs
-*.log
-npm-debug.log*
