@@ -2,15 +2,9 @@ import FirebaseFirestore
 import Foundation
 
 final class FirestoreService {
-    private lazy var db: Firestore = {
-        let firestore = Firestore.firestore()
-        let settings = firestore.settings
-        settings.cacheSettings = PersistentCacheSettings(
-            sizeBytes: 100 * 1024 * 1024 as NSNumber
-        )
-        firestore.settings = settings
-        return firestore
-    }()
+    private var db: Firestore {
+        Firestore.firestore()
+    }
 
     /// Returns the Firestore instance or throws if Firebase is not configured.
     /// This prevents crashes when GoogleService-Info.plist is missing (CI, first launch).
