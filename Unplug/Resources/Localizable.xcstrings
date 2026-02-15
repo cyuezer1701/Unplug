@@ -1,0 +1,864 @@
+{
+  "sourceLanguage": "en",
+  "version": "1.0",
+  "strings": {
+    "tab.home": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Home" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Home" } }
+      }
+    },
+    "tab.insights": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Insights" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Einblicke" } }
+      }
+    },
+    "tab.social": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Social" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Sozial" } }
+      }
+    },
+    "tab.settings": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Settings" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Einstellungen" } }
+      }
+    },
+    "greeting.morning": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Good Morning" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Guten Morgen" } }
+      }
+    },
+    "greeting.afternoon": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Good Afternoon" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Guten Nachmittag" } }
+      }
+    },
+    "greeting.evening": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Good Evening" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Guten Abend" } }
+      }
+    },
+    "greeting.night": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Good Night" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Gute Nacht" } }
+      }
+    },
+    "home.screentime": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Screen Time" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Bildschirmzeit" } }
+      }
+    },
+    "home.interventions": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "interventions" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Interventionen" } }
+      }
+    },
+    "home.streak": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Streak" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Serie" } }
+      }
+    },
+    "home.achievements": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Achievements" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erfolge" } }
+      }
+    },
+    "home.challenge": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Active Challenge" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Aktive Challenge" } }
+      }
+    },
+    "home.mood.today": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Today's Mood" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Heutige Stimmung" } }
+      }
+    },
+    "home.mood.question": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "How are you feeling?" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Wie geht es dir?" } }
+      }
+    },
+    "home.mood.save": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Save Mood" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Stimmung speichern" } }
+      }
+    },
+    "home.mood.saved": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Mood Saved!" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Gespeichert!" } }
+      }
+    },
+    "home.intervention.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Feeling the urge?" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Spürst du den Drang?" } }
+      }
+    },
+    "home.intervention.subtitle": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Start an intervention to break the scrolling habit" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Starte eine Intervention gegen das Scrollen" } }
+      }
+    },
+    "home.intervention.button": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Start Intervention" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Intervention starten" } }
+      }
+    },
+    "intervention.trigger.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "What triggered you?" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Was hat dich getriggert?" } }
+      }
+    },
+    "intervention.trigger.subtitle": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Understanding your triggers helps build awareness" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Deine Trigger zu verstehen hilft beim Bewusstwerden" } }
+      }
+    },
+    "intervention.alternatives.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Try something different" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Probier etwas anderes" } }
+      }
+    },
+    "intervention.alternatives.subtitle": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Pick an activity that matches your mood" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Wähle eine Aktivität die zu deiner Stimmung passt" } }
+      }
+    },
+    "intervention.activity.encouragement": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "You're doing great! Keep going." } },
+        "de": { "stringUnit": { "state": "translated", "value": "Du machst das super! Weiter so." } }
+      }
+    },
+    "intervention.activity.done": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "I'm Done" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Fertig" } }
+      }
+    },
+    "intervention.activity.different": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Try Something Else" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Etwas anderes versuchen" } }
+      }
+    },
+    "intervention.complete.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Well done!" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Gut gemacht!" } }
+      }
+    },
+    "intervention.complete.subtitle": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "You chose to do something meaningful instead of scrolling" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Du hast dich für etwas Sinnvolles entschieden" } }
+      }
+    },
+    "intervention.complete.mood": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "How do you feel now?" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Wie fühlst du dich jetzt?" } }
+      }
+    },
+    "intervention.complete.notes": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Notes (optional)" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Notizen (optional)" } }
+      }
+    },
+    "intervention.complete.notes.placeholder": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "How was the experience?" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Wie war die Erfahrung?" } }
+      }
+    },
+    "intervention.complete.save": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Save & Close" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Speichern & Schließen" } }
+      }
+    },
+    "intervention.back": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Back" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Zurück" } }
+      }
+    },
+    "intervention.next": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Next" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Weiter" } }
+      }
+    },
+    "intervention.close": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Close" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Schließen" } }
+      }
+    },
+    "insights.interventions": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Interventions" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Interventionen" } }
+      }
+    },
+    "insights.saved": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Saved" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Gespart" } }
+      }
+    },
+    "insights.mood": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Avg Mood" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Stimmung" } }
+      }
+    },
+    "insights.mood.trend": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Mood Trend" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Stimmungsverlauf" } }
+      }
+    },
+    "insights.triggers": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Top Triggers" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Häufigste Trigger" } }
+      }
+    },
+    "insights.empty.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "No data yet" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Noch keine Daten" } }
+      }
+    },
+    "insights.empty.subtitle": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Complete your first intervention to see insights here" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Schließe deine erste Intervention ab, um Einblicke zu sehen" } }
+      }
+    },
+    "settings.profile": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Profile" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Profil" } }
+      }
+    },
+    "settings.triggers": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Triggers" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Trigger" } }
+      }
+    },
+    "settings.triggers.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Select the triggers that apply to you" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Wähle die Trigger die auf dich zutreffen" } }
+      }
+    },
+    "settings.goals": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Goals" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Ziele" } }
+      }
+    },
+    "settings.preferences": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Preferences" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Einstellungen" } }
+      }
+    },
+    "settings.notifications": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Notifications" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Benachrichtigungen" } }
+      }
+    },
+    "settings.notifications.enable": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Enable Notifications" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Benachrichtigungen aktivieren" } }
+      }
+    },
+    "settings.notifications.time": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Reminder Time" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erinnerungszeit" } }
+      }
+    },
+    "settings.notifications.footer": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Get a daily reminder to check in with yourself" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erhalte eine tägliche Erinnerung zum Check-in" } }
+      }
+    },
+    "settings.scrolllimit": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Scroll Limit" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Scroll-Limit" } }
+      }
+    },
+    "settings.scrolllimit.header": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Daily Limit" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Tägliches Limit" } }
+      }
+    },
+    "settings.scrolllimit.footer": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Set your daily screen time limit for social media" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Lege dein tägliches Bildschirmzeit-Limit fest" } }
+      }
+    },
+    "settings.scrolllimit.minutes": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "minutes" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Minuten" } }
+      }
+    },
+    "settings.account": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Account" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Konto" } }
+      }
+    },
+    "settings.signout": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Sign Out" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Abmelden" } }
+      }
+    },
+    "settings.signout.confirm.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Sign Out?" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Abmelden?" } }
+      }
+    },
+    "settings.signout.confirm.cancel": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Cancel" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Abbrechen" } }
+      }
+    },
+    "settings.signout.confirm.action": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Sign Out" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Abmelden" } }
+      }
+    },
+    "settings.reset": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Reset App" } },
+        "de": { "stringUnit": { "state": "translated", "value": "App zurücksetzen" } }
+      }
+    },
+    "settings.reset.confirm.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Reset App?" } },
+        "de": { "stringUnit": { "state": "translated", "value": "App zurücksetzen?" } }
+      }
+    },
+    "settings.reset.confirm.cancel": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Cancel" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Abbrechen" } }
+      }
+    },
+    "settings.reset.confirm.action": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Reset" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Zurücksetzen" } }
+      }
+    },
+    "settings.reset.confirm.message": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "This will delete all your data and start fresh" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Alle Daten werden gelöscht und die App wird zurückgesetzt" } }
+      }
+    },
+    "settings.save": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Save" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Speichern" } }
+      }
+    },
+    "social.buddy.anonymous": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Anonymous Buddy" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Anonymer Buddy" } }
+      }
+    },
+    "social.buddy.today": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "today" } },
+        "de": { "stringUnit": { "state": "translated", "value": "heute" } }
+      }
+    },
+    "social.empty.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "No Buddies Yet" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Noch keine Buddies" } }
+      }
+    },
+    "social.empty.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Connect with friends to stay motivated together" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Verbinde dich mit Freunden um gemeinsam motiviert zu bleiben" } }
+      }
+    },
+    "social.invite.button": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Invite a Buddy" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Buddy einladen" } }
+      }
+    },
+    "social.invite.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Connect" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Verbinden" } }
+      }
+    },
+    "social.invite.share": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Share Your Code" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Teile deinen Code" } }
+      }
+    },
+    "social.invite.shareButton": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Share" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Teilen" } }
+      }
+    },
+    "social.invite.generate": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Generate Code" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Code generieren" } }
+      }
+    },
+    "social.invite.or": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "or" } },
+        "de": { "stringUnit": { "state": "translated", "value": "oder" } }
+      }
+    },
+    "social.invite.enter": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Enter a Code" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Code eingeben" } }
+      }
+    },
+    "social.invite.placeholder": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Enter 6-digit code" } },
+        "de": { "stringUnit": { "state": "translated", "value": "6-stelligen Code eingeben" } }
+      }
+    },
+    "social.invite.connect": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Connect" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Verbinden" } }
+      }
+    },
+    "social.error.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Error" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Fehler" } }
+      }
+    },
+    "social.error.generateCode": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Could not generate invite code" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Einladungscode konnte nicht erstellt werden" } }
+      }
+    },
+    "social.error.invalidCode": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Invalid code. Please check and try again." } },
+        "de": { "stringUnit": { "state": "translated", "value": "Ungültiger Code. Bitte prüfen und erneut versuchen." } }
+      }
+    },
+    "social.error.ownCode": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "You can't use your own code" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Du kannst nicht deinen eigenen Code verwenden" } }
+      }
+    },
+    "social.error.connection": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Connection failed. Please try again." } },
+        "de": { "stringUnit": { "state": "translated", "value": "Verbindung fehlgeschlagen. Bitte erneut versuchen." } }
+      }
+    },
+    "achievements.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Achievements" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erfolge" } }
+      }
+    },
+    "achievement.firstDay.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "First Day" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erster Tag" } }
+      }
+    },
+    "achievement.firstDay.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Completed your first intervention" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erste Intervention abgeschlossen" } }
+      }
+    },
+    "achievement.threeDayStreak.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "3-Day Streak" } },
+        "de": { "stringUnit": { "state": "translated", "value": "3-Tage-Serie" } }
+      }
+    },
+    "achievement.threeDayStreak.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Maintained a 3-day streak" } },
+        "de": { "stringUnit": { "state": "translated", "value": "3-Tage-Serie erreicht" } }
+      }
+    },
+    "achievement.sevenDayStreak.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Week Warrior" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Wochen-Krieger" } }
+      }
+    },
+    "achievement.sevenDayStreak.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Maintained a 7-day streak" } },
+        "de": { "stringUnit": { "state": "translated", "value": "7-Tage-Serie erreicht" } }
+      }
+    },
+    "achievement.thirtyDayStreak.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Monthly Master" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Monats-Meister" } }
+      }
+    },
+    "achievement.thirtyDayStreak.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Maintained a 30-day streak" } },
+        "de": { "stringUnit": { "state": "translated", "value": "30-Tage-Serie erreicht" } }
+      }
+    },
+    "achievement.firstIntervention.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "First Step" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erster Schritt" } }
+      }
+    },
+    "achievement.firstIntervention.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Accepted your first intervention" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erste Intervention akzeptiert" } }
+      }
+    },
+    "achievement.hundredMinutesSaved.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Time Saver" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Zeitsparer" } }
+      }
+    },
+    "achievement.hundredMinutesSaved.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Saved 100 minutes from scrolling" } },
+        "de": { "stringUnit": { "state": "translated", "value": "100 Minuten Scrollzeit eingespart" } }
+      }
+    },
+    "achievement.allTriggersIdentified.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Self-Aware" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Selbsterkenntnis" } }
+      }
+    },
+    "achievement.allTriggersIdentified.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Identified all trigger types" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Alle Trigger-Typen erkannt" } }
+      }
+    },
+    "achievement.firstBuddy.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Social Butterfly" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Sozialschmetterling" } }
+      }
+    },
+    "achievement.firstBuddy.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Connected with your first buddy" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Ersten Buddy verbunden" } }
+      }
+    },
+    "achievement.locked.label": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Locked achievement" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Gesperrter Erfolg" } }
+      }
+    },
+    "achievement.unlocked.label %@": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Achievement: %@, unlocked" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erfolg: %@, freigeschaltet" } }
+      }
+    },
+    "challenges.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Challenges" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Challenges" } }
+      }
+    },
+    "challenges.active": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Active" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Aktiv" } }
+      }
+    },
+    "challenges.available": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Available" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Verfügbar" } }
+      }
+    },
+    "challenges.days": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "days" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Tage" } }
+      }
+    },
+    "challenges.remaining": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "remaining" } },
+        "de": { "stringUnit": { "state": "translated", "value": "verbleibend" } }
+      }
+    },
+    "challenges.start": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Start Challenge" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Challenge starten" } }
+      }
+    },
+    "challenges.completed": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Completed!" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Abgeschlossen!" } }
+      }
+    },
+    "challenge.firstSteps.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "First Steps" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erste Schritte" } }
+      }
+    },
+    "challenge.firstSteps.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Complete 1 intervention per day for 3 days" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Schließe 3 Tage lang täglich 1 Intervention ab" } }
+      }
+    },
+    "challenge.mindfulMorning.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Mindful Morning" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Achtsamer Morgen" } }
+      }
+    },
+    "challenge.mindfulMorning.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Complete 1 intervention before 10am for 7 days" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Schließe 7 Tage lang vor 10 Uhr 1 Intervention ab" } }
+      }
+    },
+    "challenge.phoneFreeEvening.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Phone-Free Evening" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Handyfreier Abend" } }
+      }
+    },
+    "challenge.phoneFreeEvening.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "No screen time after 8pm for 5 days" } },
+        "de": { "stringUnit": { "state": "translated", "value": "5 Tage lang keine Bildschirmzeit nach 20 Uhr" } }
+      }
+    },
+    "challenge.streakBuilder.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Streak Builder" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Serien-Baumeister" } }
+      }
+    },
+    "challenge.streakBuilder.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Build a 7-day intervention streak" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Baue eine 7-Tage-Interventions-Serie auf" } }
+      }
+    },
+    "challenge.moodTracker.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Mood Tracker" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Stimmungstracker" } }
+      }
+    },
+    "challenge.moodTracker.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Log your mood every day for 7 days" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Logge 7 Tage lang täglich deine Stimmung" } }
+      }
+    },
+    "challenge.triggerMaster.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Trigger Master" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Trigger-Meister" } }
+      }
+    },
+    "challenge.triggerMaster.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Identify 5 different triggers in one week" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erkenne 5 verschiedene Trigger in einer Woche" } }
+      }
+    },
+    "challenge.hundredMinutes.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "100 Minutes" } },
+        "de": { "stringUnit": { "state": "translated", "value": "100 Minuten" } }
+      }
+    },
+    "challenge.hundredMinutes.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Save 100 minutes from scrolling" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Spare 100 Minuten Scrollzeit ein" } }
+      }
+    },
+    "challenge.mindfulWeek.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Mindful Week" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Achtsame Woche" } }
+      }
+    },
+    "challenge.mindfulWeek.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Complete 3+ interventions daily for 7 days" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Schließe 7 Tage lang täglich 3+ Interventionen ab" } }
+      }
+    },
+    "trigger.boredom": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Boredom" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Langeweile" } }
+      }
+    },
+    "trigger.stress": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Stress" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Stress" } }
+      }
+    },
+    "trigger.procrastination": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Procrastination" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Prokrastination" } }
+      }
+    },
+    "trigger.habit": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Habit" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Gewohnheit" } }
+      }
+    },
+    "trigger.fomo": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "FOMO" } },
+        "de": { "stringUnit": { "state": "translated", "value": "FOMO" } }
+      }
+    },
+    "trigger.loneliness": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Loneliness" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Einsamkeit" } }
+      }
+    },
+    "trigger.anxiety": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Anxiety" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Angst" } }
+      }
+    },
+    "trigger.insomnia": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Insomnia" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Schlaflosigkeit" } }
+      }
+    },
+    "onboarding.screentime.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Screen Time Access" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Bildschirmzeit-Zugriff" } }
+      }
+    },
+    "onboarding.screentime.description": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Allow Unplug to monitor your screen time and help you stay within your daily limit" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erlaube Unplug deine Bildschirmzeit zu überwachen und dir beim Einhalten deines Tageslimits zu helfen" } }
+      }
+    },
+    "onboarding.screentime.privacy": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Your data stays on your device. We never share your screen time data." } },
+        "de": { "stringUnit": { "state": "translated", "value": "Deine Daten bleiben auf deinem Gerät. Wir teilen niemals deine Bildschirmzeit-Daten." } }
+      }
+    },
+    "onboarding.screentime.allow": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Allow Access" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Zugriff erlauben" } }
+      }
+    },
+    "onboarding.screentime.skip": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Skip for now" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Erstmal überspringen" } }
+      }
+    },
+    "notification.reminder.title": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Time to check in!" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Zeit für einen Check-in!" } }
+      }
+    },
+    "notification.reminder.body": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "How are you feeling today? Take a moment to reflect." } },
+        "de": { "stringUnit": { "state": "translated", "value": "Wie geht es dir heute? Nimm dir einen Moment zum Reflektieren." } }
+      }
+    },
+    "social.invite.message %@": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Join me on Unplug! Use my invite code: %@" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Begleite mich auf Unplug! Nutze meinen Einladungscode: %@" } }
+      }
+    }
+  }
+}
