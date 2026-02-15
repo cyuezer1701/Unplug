@@ -56,6 +56,14 @@ final class HomeViewModel {
             todaySessionCount = sessions.count
             todayScreenTimeMinutes = sessions.reduce(0) { $0 + $1.durationMinutes }
             lastMood = moods.first
+
+            // Write widget data to App Group
+            let prefs = UserPreferences.shared
+            prefs.widgetStreakCount = streak?.currentCount ?? 0
+            prefs.widgetTodaySessionCount = sessions.count
+            prefs.widgetMinutesSaved = InsightsCalculator.totalMinutesSaved(sessions: sessions)
+            prefs.widgetLatestMoodEmoji = moods.first?.moodEmoji ?? ""
+            prefs.widgetLastUpdated = .now
         } catch {
             // Offline fallback — keep existing state
         }

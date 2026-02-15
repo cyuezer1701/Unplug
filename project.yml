@@ -116,6 +116,26 @@ targets:
         release:
           INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.shieldconfiguration
 
+  UnplugWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: UnplugWidget
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.unplug.app.widget
+        CODE_SIGN_ENTITLEMENTS: UnplugWidget/UnplugWidget.entitlements
+        GENERATE_INFOPLIST_FILE: YES
+        SKIP_INSTALL: YES
+        CODE_SIGN_IDENTITY: ""
+        CODE_SIGNING_REQUIRED: NO
+        CODE_SIGNING_ALLOWED: NO
+      configs:
+        debug:
+          INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.widgetkit-extension
+        release:
+          INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.widgetkit-extension
+
 schemes:
   Unplug:
     build:
@@ -123,6 +143,7 @@ schemes:
         Unplug: all
         DeviceActivityMonitor: all
         ShieldConfiguration: all
+        UnplugWidget: all
     run:
       config: Debug
       executable: Unplug

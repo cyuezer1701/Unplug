@@ -27,4 +27,31 @@ final class UserPreferences: @unchecked Sendable {
         }
         set { defaults.set(newValue, forKey: "dailyScrollLimitMinutes") }
     }
+
+    // MARK: - Widget Data
+
+    var widgetStreakCount: Int {
+        get { defaults.integer(forKey: "widgetStreakCount") }
+        set { defaults.set(newValue, forKey: "widgetStreakCount") }
+    }
+
+    var widgetTodaySessionCount: Int {
+        get { defaults.integer(forKey: "widgetTodaySessionCount") }
+        set { defaults.set(newValue, forKey: "widgetTodaySessionCount") }
+    }
+
+    var widgetMinutesSaved: Int {
+        get { defaults.integer(forKey: "widgetMinutesSaved") }
+        set { defaults.set(newValue, forKey: "widgetMinutesSaved") }
+    }
+
+    var widgetLatestMoodEmoji: String {
+        get { defaults.string(forKey: "widgetLatestMoodEmoji") ?? "" }
+        set { defaults.set(newValue, forKey: "widgetLatestMoodEmoji") }
+    }
+
+    var widgetLastUpdated: Date {
+        get { defaults.object(forKey: "widgetLastUpdated") as? Date ?? .distantPast }
+        set { defaults.set(newValue, forKey: "widgetLastUpdated") }
+    }
 }
