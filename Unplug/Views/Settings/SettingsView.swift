@@ -2,38 +2,73 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(AppState.self) private var appState
+    @Environment(AuthService.self) private var authService
+    @State private var viewModel = SettingsViewModel()
 
     var body: some View {
         NavigationStack {
             List {
-                Section("Profile") {
-                    Label("Edit Triggers", systemImage: "bolt.circle")
-                    Label("Edit Goals", systemImage: "target")
-                    Label("Monitored Apps", systemImage: "app.badge")
+                Section(String(localized: "settings.profile")) {
+                    NavigationLink {
+                        EditTriggersView(appState: appState, viewModel: viewModel)
+                    } label: {
+                        Label(String(localized: "settings.triggers"), systemImage: "bolt.circle")
+                    }
+
+                    NavigationLink {
+                        EditGoalsView(appState: appState, viewModel: viewModel)
+                    } label: {
+                        Label(String(localized: "settings.goals"), systemImage: "target")
+                    }
                 }
 
-                Section("Preferences") {
-                    Label("Notifications", systemImage: "bell")
-                    Label("Daily Scroll Limit", systemImage: "timer")
-                    Label("Appearance", systemImage: "paintbrush")
+                Section(String(localized: "settings.preferences")) {
+                    NavigationLink {
+                        NotificationSettingsView()
+                    } label: {
+                        Label(String(localized: "settings.notifications"), systemImage: "bell")
+                    }
+
+                    NavigationLink {
+                        ScrollLimitView(viewModel: viewModel)
+                    } label: {
+                        Label(String(localized: "settings.scrolllimit"), systemImage: "timer")
+                    }
                 }
 
-                Section("Account") {
-                    Label("Premium", systemImage: "crown")
-                        .foregroundStyle(UnplugTheme.Colors.accentCoral)
-                    Label("Privacy Policy", systemImage: "lock.shield")
-                    Label("About Unplug", systemImage: "info.circle")
+                Section(String(localized: "settings.account")) {
+                    Button {
+                        viewModel.showingSignOutConfirmation = true
+                    } label: {
+                        Label(String(localized: "settings.signout"), systemImage: "rectangle.portrait.and.arrow.right")
+                    }
                 }
 
                 Section {
                     Button(role: .destructive) {
-                        // Phase 2: Reset/logout flow
+                        viewModel.showingResetConfirmation = true
                     } label: {
-                        Label("Reset App", systemImage: "arrow.counterclockwise")
+                        Label(String(localized: "settings.reset"), systemImage: "arrow.counterclockwise")
                     }
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle(String(localized: "tab.settings"))
+            .alert(String(localized: "settings.reset.confirm.title"), isPresented: $viewModel.showingResetConfirmation) {
+                Button(String(localized: "settings.reset.confirm.cancel"), role: .cancel) {}
+                Button(String(localized: "settings.reset.confirm.action"), role: .destructive) {
+                    Task {
+                        try? await viewModel.resetApp(authService: authService, appState: appState)
+                    }
+                }
+            } message: {
+                Text(String(localized: "settings.reset.confirm.message"))
+            }
+            .alert(String(localized: "settings.signout.confirm.title"), isPresented: $viewModel.showingSignOutConfirmation) {
+                Button(String(localized: "settings.signout.confirm.cancel"), role: .cancel) {}
+                Button(String(localized: "settings.signout.confirm.action"), role: .destructive) {
+                    try? viewModel.signOut(authService: authService, appState: appState)
+                }
+            }
         }
     }
 }

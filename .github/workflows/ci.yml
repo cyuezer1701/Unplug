@@ -24,11 +24,18 @@ jobs:
       - name: Generate Xcode Project
         run: xcodegen generate
 
+      - name: Resolve SPM Dependencies
+        run: |
+          xcodebuild -resolvePackageDependencies \
+            -scheme Unplug \
+            -clonedSourcePackagesDirPath .spm-cache
+
       - name: Build
         run: |
           xcodebuild build \
             -scheme Unplug \
             -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -clonedSourcePackagesDirPath .spm-cache \
             -quiet
 
       - name: Run Tests
@@ -36,6 +43,7 @@ jobs:
           xcodebuild test \
             -scheme Unplug \
             -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -clonedSourcePackagesDirPath .spm-cache \
             -resultBundlePath TestResults.xcresult \
             -quiet
 

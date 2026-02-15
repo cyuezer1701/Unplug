@@ -77,4 +77,60 @@ final class FirestoreService {
                 .addDocument(from: streak)
         }
     }
+
+    func getAllStreaks(userId: String) async throws -> [Streak] {
+        let snapshot = try await db.collection("users")
+            .document(userId)
+            .collection("streaks")
+            .getDocuments()
+
+        return snapshot.documents.compactMap { try? $0.data(as: Streak.self) }
+    }
+
+    // MARK: - Scroll Sessions
+
+    func saveSession(_ session: ScrollSession) async throws {
+        try db.collection("users")
+            .document(session.userId)
+            .collection("sessions")
+            .addDocument(from: session)
+    }
+
+    func getTodaySessions(userId: String) async throws -> [ScrollSession] {
+        let startOfToday = Calendar.current.startOfDay(for: .now)
+        let snapshot = try await db.collection("users")
+            .document(userId)
+            .collection("sessions")
+            .whereField("startedAt", isGreaterThanOrEqualTo: startOfToday)
+            .order(by: "startedAt", descending: true)
+            .getDocuments()
+
+        return snapshot.documents.compactMap { try? $0.data(as: ScrollSession.self) }
+    }
+
+    func getSessions(userId: String, from: Date, to: Date) async throws -> [ScrollSession] {
+        let snapshot = try await db.collection("users")
+            .document(userId)
+            .collection("sessions")
+            .whereField("startedAt", isGreaterThanOrEqualTo: from)
+            .whereField("startedAt", isLessThan: to)
+            .order(by: "startedAt", descending: true)
+            .getDocuments()
+
+        return snapshot.documents.compactMap { try? $0.data(as: ScrollSession.self) }
+    }
+
+    // MARK: - Mood Entries (Date Range)
+
+    func getMoods(userId: String, from: Date, to: Date) async throws -> [MoodEntry] {
+        let snapshot = try await db.collection("users")
+            .document(userId)
+            .collection("moods")
+            .whereField("createdAt", isGreaterThanOrEqualTo: from)
+            .whereField("createdAt", isLessThan: to)
+            .order(by: "createdAt", descending: true)
+            .getDocuments()
+
+        return snapshot.documents.compactMap { try? $0.data(as: MoodEntry.self) }
+    }
 }

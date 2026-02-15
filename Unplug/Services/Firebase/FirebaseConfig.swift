@@ -1,4 +1,5 @@
 import FirebaseCore
+import Foundation
 
 enum FirebaseConfig {
     static var isConfigured = false
@@ -9,6 +10,12 @@ enum FirebaseConfig {
             isConfigured = true
             return
         }
+
+        // Skip Firebase if GoogleService-Info.plist is missing (e.g. CI)
+        guard Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil else {
+            return
+        }
+
         FirebaseApp.configure()
         isConfigured = true
     }
