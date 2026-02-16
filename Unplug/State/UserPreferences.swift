@@ -1,3 +1,4 @@
+import FamilyControls
 import Foundation
 
 final class UserPreferences: @unchecked Sendable {
@@ -53,5 +54,26 @@ final class UserPreferences: @unchecked Sendable {
     var widgetLastUpdated: Date {
         get { defaults.object(forKey: "widgetLastUpdated") as? Date ?? .distantPast }
         set { defaults.set(newValue, forKey: "widgetLastUpdated") }
+    }
+
+    // MARK: - Monitored Apps Selection
+
+    var monitoredAppsSelectionData: Data? {
+        get { defaults.data(forKey: "monitoredAppsSelectionData") }
+        set { defaults.set(newValue, forKey: "monitoredAppsSelectionData") }
+    }
+
+    func saveMonitoredAppsSelection(_ selection: FamilyActivitySelection) {
+        monitoredAppsSelectionData = try? PropertyListEncoder().encode(selection)
+    }
+
+    func loadMonitoredAppsSelection() -> FamilyActivitySelection? {
+        guard let data = monitoredAppsSelectionData else { return nil }
+        return try? PropertyListDecoder().decode(FamilyActivitySelection.self, from: data)
+    }
+
+    var hasMonitoredAppsSelection: Bool {
+        guard let selection = loadMonitoredAppsSelection() else { return false }
+        return !selection.applicationTokens.isEmpty || !selection.categoryTokens.isEmpty
     }
 }

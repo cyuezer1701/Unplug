@@ -1,3 +1,4 @@
+import FamilyControls
 import SwiftUI
 
 @Observable
@@ -9,6 +10,7 @@ final class OnboardingState {
     var screenTimePermissionGranted: Bool = false
     var notificationsEnabled: Bool = false
     var dailyCheckInTime: Date = OnboardingState.defaultCheckInTime()
+    var monitoredAppsSelection = FamilyActivitySelection()
 
     var canProceed: Bool {
         switch currentStep {
@@ -19,6 +21,8 @@ final class OnboardingState {
         case .goals:
             return !selectedGoals.isEmpty
         case .screenTime:
+            return true
+        case .appSelection:
             return true
         case .notifications:
             return true
@@ -31,12 +35,22 @@ final class OnboardingState {
 
     func advance() {
         guard let next = currentStep.next else { return }
-        currentStep = next
+        // Skip app selection if Screen Time permission wasn't granted
+        if next == .appSelection && !screenTimePermissionGranted {
+            currentStep = .notifications
+        } else {
+            currentStep = next
+        }
     }
 
     func goBack() {
         guard let prev = currentStep.previous else { return }
-        currentStep = prev
+        // Skip app selection when going back if permission wasn't granted
+        if prev == .appSelection && !screenTimePermissionGranted {
+            currentStep = .screenTime
+        } else {
+            currentStep = prev
+        }
     }
 
     static func defaultCheckInTime() -> Date {
@@ -52,7 +66,8 @@ enum OnboardingStep: Int, CaseIterable, Sendable {
     case triggers = 1
     case goals = 2
     case screenTime = 3
-    case notifications = 4
+    case appSelection = 4
+    case notifications = 5
 
     var next: OnboardingStep? {
         OnboardingStep(rawValue: rawValue + 1)

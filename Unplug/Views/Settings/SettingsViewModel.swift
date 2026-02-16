@@ -1,3 +1,4 @@
+import FamilyControls
 import SwiftUI
 
 @Observable
@@ -30,6 +31,12 @@ final class SettingsViewModel {
         UserPreferences.shared.dailyScrollLimitMinutes = minutes
     }
 
+    func updateMonitoredApps(_ selection: FamilyActivitySelection) {
+        UserPreferences.shared.saveMonitoredAppsSelection(selection)
+        let screenTimeService = ScreenTimeService()
+        try? screenTimeService.restartMonitoring()
+    }
+
     func signOut(authService: AuthService, appState: AppState) throws {
         try authService.signOut()
         appState.currentUser = nil
@@ -46,6 +53,7 @@ final class SettingsViewModel {
         UserPreferences.shared.hasCompletedOnboarding = false
         UserPreferences.shared.userId = nil
         UserPreferences.shared.dailyScrollLimitMinutes = 60
+        UserPreferences.shared.monitoredAppsSelectionData = nil
         // Trigger re-initialization (re-auth with Firebase)
         appState.isLoading = true
     }

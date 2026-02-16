@@ -2839,6 +2839,134 @@
           }
         }
       }
+    },
+    "onboarding.appselection.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welche Apps lenken dich ab?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which apps distract you?"
+          }
+        }
+      }
+    },
+    "onboarding.appselection.description": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle die Apps aus, die du überwachen möchtest. Wir tracken nur die Zeit in diesen Apps."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select the apps you want to monitor. We'll only track time spent on these apps."
+          }
+        }
+      }
+    },
+    "onboarding.appselection.selected %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Apps & Kategorien ausgewählt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld apps & categories selected"
+          }
+        }
+      }
+    },
+    "onboarding.appselection.skip": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stattdessen alle Apps überwachen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monitor all apps instead"
+          }
+        }
+      }
+    },
+    "settings.monitoredapps": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Überwachte Apps"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monitored Apps"
+          }
+        }
+      }
+    },
+    "settings.monitoredapps.description": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle welche Apps getrackt werden. Nur ausgewählte Apps zählen zum Tageslimit."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose which apps to track. Only selected apps will count toward your daily limit."
+          }
+        }
+      }
+    },
+    "settings.monitoredapps.count %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Apps & Kategorien ausgewählt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld apps & categories selected"
+          }
+        }
+      }
+    },
+    "settings.monitoredapps.allApps": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Apps werden überwacht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All apps are being monitored"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

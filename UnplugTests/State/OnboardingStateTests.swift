@@ -30,9 +30,11 @@ struct OnboardingStateTests {
 
     @Test func advanceThroughAllSteps() {
         let state = OnboardingState()
+        state.screenTimePermissionGranted = true
         state.advance() // → triggers
         state.advance() // → goals
         state.advance() // → screenTime
+        state.advance() // → appSelection
         state.advance() // → notifications
         #expect(state.currentStep == .notifications)
     }
@@ -59,9 +61,9 @@ struct OnboardingStateTests {
 
     // MARK: - Progress
 
-    @Test func progressAtWelcomeIsOneFifth() {
+    @Test func progressAtWelcomeIsOneSixth() {
         let state = OnboardingState()
-        #expect(state.progress == 1.0 / 5.0)
+        #expect(state.progress == 1.0 / 6.0)
     }
 
     @Test func progressAtNotificationsIsFull() {
@@ -72,10 +74,10 @@ struct OnboardingStateTests {
 
     @Test func progressIncrementsCorrectly() {
         let state = OnboardingState()
-        let expectedSteps: [OnboardingStep] = [.welcome, .triggers, .goals, .screenTime, .notifications]
+        let expectedSteps: [OnboardingStep] = [.welcome, .triggers, .goals, .screenTime, .appSelection, .notifications]
         for (index, step) in expectedSteps.enumerated() {
             state.currentStep = step
-            let expected = Double(index + 1) / 5.0
+            let expected = Double(index + 1) / 6.0
             #expect(abs(state.progress - expected) < 0.001, "Progress at \(step) should be \(expected)")
         }
     }
@@ -119,9 +121,49 @@ struct OnboardingStateTests {
         #expect(state.canProceed == true)
     }
 
+    @Test func canAlwaysProceedFromAppSelection() {
+        let state = OnboardingState()
+        state.currentStep = .appSelection
+        #expect(state.canProceed == true)
+    }
+
     @Test func canAlwaysProceedFromNotifications() {
         let state = OnboardingState()
         state.currentStep = .notifications
         #expect(state.canProceed == true)
+    }
+
+    // MARK: - App Selection Step Skipping
+
+    @Test func appSelectionStepExistsAfterScreenTime() {
+        let state = OnboardingState()
+        state.screenTimePermissionGranted = true
+        state.currentStep = .screenTime
+        state.advance()
+        #expect(state.currentStep == .appSelection)
+    }
+
+    @Test func appSelectionStepSkippedWhenNoPermission() {
+        let state = OnboardingState()
+        state.screenTimePermissionGranted = false
+        state.currentStep = .screenTime
+        state.advance()
+        #expect(state.currentStep == .notifications)
+    }
+
+    @Test func goBackFromNotificationsSkipsAppSelectionWhenNoPermission() {
+        let state = OnboardingState()
+        state.screenTimePermissionGranted = false
+        state.currentStep = .notifications
+        state.goBack()
+        #expect(state.currentStep == .screenTime)
+    }
+
+    @Test func goBackFromNotificationsGoesToAppSelectionWhenPermissionGranted() {
+        let state = OnboardingState()
+        state.screenTimePermissionGranted = true
+        state.currentStep = .notifications
+        state.goBack()
+        #expect(state.currentStep == .appSelection)
     }
 }

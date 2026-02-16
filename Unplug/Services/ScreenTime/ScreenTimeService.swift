@@ -33,10 +33,23 @@ final class ScreenTimeService {
             repeats: true
         )
 
+        // Build event with app filter if user selected specific apps
+        let selection = UserPreferences.shared.loadMonitoredAppsSelection()
+        let event: DeviceActivityEvent
+        if let selection,
+           !selection.applicationTokens.isEmpty || !selection.categoryTokens.isEmpty {
+            event = DeviceActivityEvent(
+                applications: selection.applicationTokens,
+                categories: selection.categoryTokens,
+                threshold: DateComponents(minute: limitMinutes)
+            )
+        } else {
+            event = DeviceActivityEvent(
+                threshold: DateComponents(minute: limitMinutes)
+            )
+        }
+
         let eventName = DeviceActivityEvent.Name("scrollLimit")
-        let event = DeviceActivityEvent(
-            threshold: DateComponents(minute: limitMinutes)
-        )
 
         // Store limit in App Group for extension access
         UserPreferences.shared.dailyScrollLimitMinutes = limitMinutes
@@ -57,5 +70,11 @@ final class ScreenTimeService {
     func updateLimit(minutes: Int) throws {
         stopMonitoring()
         try startMonitoring(limitMinutes: minutes)
+    }
+
+    func restartMonitoring() throws {
+        let limit = UserPreferences.shared.dailyScrollLimitMinutes
+        stopMonitoring()
+        try startMonitoring(limitMinutes: limit)
     }
 }

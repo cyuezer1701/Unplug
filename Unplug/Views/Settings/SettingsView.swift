@@ -34,6 +34,12 @@ struct SettingsView: View {
                     } label: {
                         Label(String(localized: "settings.scrolllimit"), systemImage: "timer")
                     }
+
+                    NavigationLink {
+                        MonitoredAppsView(viewModel: viewModel)
+                    } label: {
+                        Label(String(localized: "settings.monitoredapps"), systemImage: "apps.iphone")
+                    }
                 }
 
                 Section(String(localized: "settings.about.section")) {

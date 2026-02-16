@@ -24,6 +24,8 @@ struct OnboardingContainerView: View {
                     GoalSelectionView(state: onboardingState)
                 case .screenTime:
                     ScreenTimePermissionView(state: onboardingState)
+                case .appSelection:
+                    AppSelectionView(state: onboardingState)
                 case .notifications:
                     NotificationSetupView(state: onboardingState) {
                         completeOnboarding()
@@ -52,6 +54,14 @@ struct OnboardingContainerView: View {
         appState.currentUser = user
         UserPreferences.shared.hasCompletedOnboarding = true
         UserPreferences.shared.userId = userId
+
+        // Start Screen Time monitoring if permission was granted
+        if onboardingState.screenTimePermissionGranted {
+            let screenTimeService = ScreenTimeService()
+            try? screenTimeService.startMonitoring(
+                limitMinutes: UserPreferences.shared.dailyScrollLimitMinutes
+            )
+        }
 
         // Save to Firestore (fire-and-forget)
         Task {
