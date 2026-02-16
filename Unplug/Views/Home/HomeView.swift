@@ -11,10 +11,41 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: UnplugTheme.Spacing.lg) {
+                    // Error banner
+                    if let error = homeViewModel.errorMessage {
+                        ErrorBanner(
+                            message: error,
+                            onRetry: {
+                                Task {
+                                    guard let userId = appState.currentUser?.id else { return }
+                                    let firestoreService = FirestoreService()
+                                    await homeViewModel.loadDashboardData(
+                                        userId: userId,
+                                        firestoreService: firestoreService,
+                                        appState: appState
+                                    )
+                                }
+                            },
+                            onDismiss: {
+                                withAnimation(.unplugSpring) {
+                                    homeViewModel.errorMessage = nil
+                                }
+                            }
+                        )
+                    }
+
                     // Greeting
                     Text(homeViewModel.greeting)
                         .font(.unplugTitle())
                         .frame(maxWidth: .infinity, alignment: .leading)
+
+                    if homeViewModel.isLoading {
+                        // Skeleton loading state
+                        SkeletonCard(height: 80)
+                        SkeletonCard(height: 70)
+                        SkeletonCard(height: 100)
+                        SkeletonCard(height: 80)
+                    } else {
 
                     // Today's progress
                     UnplugCard {
@@ -152,6 +183,8 @@ struct HomeView: View {
                             }
                         }
                     }
+
+                    } // end if !isLoading
                 }
                 .padding(UnplugTheme.Spacing.lg)
             }

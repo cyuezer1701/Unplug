@@ -3,6 +3,7 @@ import Foundation
 @Observable
 final class HomeViewModel {
     var isLoading: Bool = true
+    var errorMessage: String?
     private(set) var todaySessionCount: Int = 0
     private(set) var todayScreenTimeMinutes: Int = 0
     private(set) var lastMood: MoodEntry?
@@ -56,6 +57,7 @@ final class HomeViewModel {
             todaySessionCount = sessions.count
             todayScreenTimeMinutes = sessions.reduce(0) { $0 + $1.durationMinutes }
             lastMood = moods.first
+            errorMessage = nil
 
             // Write widget data to App Group
             let prefs = UserPreferences.shared
@@ -65,7 +67,7 @@ final class HomeViewModel {
             prefs.widgetLatestMoodEmoji = moods.first?.moodEmoji ?? ""
             prefs.widgetLastUpdated = .now
         } catch {
-            // Offline fallback — keep existing state
+            errorMessage = String(localized: "error.loading")
         }
 
         isLoading = false

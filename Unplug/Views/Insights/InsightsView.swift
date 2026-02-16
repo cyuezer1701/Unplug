@@ -7,13 +7,42 @@ struct InsightsView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                if viewModel.isLoading {
-                    ProgressView()
-                        .padding(.top, UnplugTheme.Spacing.xxxl)
-                } else if !viewModel.hasData {
-                    emptyState
-                } else {
-                    insightsContent
+                VStack(spacing: UnplugTheme.Spacing.lg) {
+                    if let error = viewModel.errorMessage {
+                        ErrorBanner(
+                            message: error,
+                            onRetry: {
+                                Task {
+                                    guard let userId = appState.currentUser?.id else { return }
+                                    let firestoreService = FirestoreService()
+                                    await viewModel.loadInsights(userId: userId, firestoreService: firestoreService)
+                                }
+                            },
+                            onDismiss: {
+                                withAnimation(.unplugSpring) {
+                                    viewModel.errorMessage = nil
+                                }
+                            }
+                        )
+                        .padding(.horizontal, UnplugTheme.Spacing.lg)
+                    }
+
+                    if viewModel.isLoading {
+                        VStack(spacing: UnplugTheme.Spacing.md) {
+                            HStack(spacing: UnplugTheme.Spacing.sm) {
+                                SkeletonCard(height: 80)
+                                SkeletonCard(height: 80)
+                                SkeletonCard(height: 80)
+                            }
+                            SkeletonCard(height: 200)
+                            SkeletonCard(height: 160)
+                        }
+                        .padding(UnplugTheme.Spacing.lg)
+                    } else if !viewModel.hasData {
+                        emptyState
+                    } else {
+                        insightsContent
+                    }
                 }
             }
             .navigationTitle(String(localized: "tab.insights"))

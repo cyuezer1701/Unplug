@@ -8,8 +8,12 @@ struct SocialView: View {
         NavigationStack {
             Group {
                 if viewModel.isLoading {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    VStack(spacing: UnplugTheme.Spacing.md) {
+                        SkeletonCard(height: 90)
+                        SkeletonCard(height: 90)
+                        SkeletonCard(height: 90)
+                    }
+                    .padding(UnplugTheme.Spacing.lg)
                 } else if viewModel.buddies.isEmpty {
                     emptyState
                 } else {

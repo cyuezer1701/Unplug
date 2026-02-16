@@ -3,6 +3,7 @@ import Foundation
 @Observable
 final class InsightsViewModel {
     var isLoading = true
+    var errorMessage: String?
     var moodTrend: [InsightsCalculator.DayValue] = []
     var triggerFrequency: [InsightsCalculator.TriggerCount] = []
     var totalMinutesSaved: Int = 0
@@ -34,8 +35,9 @@ final class InsightsViewModel {
             totalMinutesSaved = InsightsCalculator.totalMinutesSaved(sessions: sessions)
             weeklySessionCount = sessions.count
             averageMood = InsightsCalculator.averageMood(entries: moods)
+            errorMessage = nil
         } catch {
-            // Offline fallback
+            errorMessage = String(localized: "error.loading")
         }
 
         isLoading = false
