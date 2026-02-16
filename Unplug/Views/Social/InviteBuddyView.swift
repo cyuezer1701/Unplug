@@ -106,7 +106,7 @@ struct InviteBuddyView: View {
             get: { viewModel.showError },
             set: { viewModel.showError = $0 }
         )) {
-            Button("OK", role: .cancel) {}
+            Button(String(localized: "button.ok"), role: .cancel) {}
         } message: {
             Text(viewModel.errorMessage)
         }

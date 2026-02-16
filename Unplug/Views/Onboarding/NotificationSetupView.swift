@@ -13,11 +13,11 @@ struct NotificationSetupView: View {
                 .foregroundStyle(UnplugTheme.Colors.accentCoral)
 
             VStack(spacing: UnplugTheme.Spacing.md) {
-                Text("Stay on track")
+                Text(String(localized: "onboarding.notifications.title"))
                     .font(.unplugHeadline())
                     .multilineTextAlignment(.center)
 
-                Text("Get a gentle daily check-in reminder. No spam, just one nudge to reflect on your day.")
+                Text(String(localized: "onboarding.notifications.description"))
                     .font(.unplugBody())
                     .foregroundStyle(UnplugTheme.Colors.textSecondary)
                     .multilineTextAlignment(.center)
@@ -26,7 +26,7 @@ struct NotificationSetupView: View {
 
             // Check-in time picker
             VStack(spacing: UnplugTheme.Spacing.sm) {
-                Text("Daily check-in time")
+                Text(String(localized: "onboarding.notifications.time"))
                     .font(.unplugSubheadline())
 
                 DatePicker(
@@ -45,7 +45,7 @@ struct NotificationSetupView: View {
             Spacer()
 
             VStack(spacing: UnplugTheme.Spacing.sm) {
-                UnplugButton(title: "Enable notifications") {
+                UnplugButton(title: String(localized: "onboarding.notifications.enable")) {
                     state.notificationsEnabled = true
                     onComplete()
                 }
@@ -53,7 +53,7 @@ struct NotificationSetupView: View {
                 Button {
                     onComplete()
                 } label: {
-                    Text("Skip for now")
+                    Text(String(localized: "onboarding.notifications.skip"))
                         .font(.unplugCallout())
                         .foregroundStyle(UnplugTheme.Colors.textSecondary)
                 }

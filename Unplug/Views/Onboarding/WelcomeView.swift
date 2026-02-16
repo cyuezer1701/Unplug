@@ -13,11 +13,11 @@ struct WelcomeView: View {
                 .symbolEffect(.pulse, options: .repeating)
 
             VStack(spacing: UnplugTheme.Spacing.md) {
-                Text("Take back your time")
+                Text(String(localized: "onboarding.welcome.title"))
                     .font(.unplugTitle())
                     .multilineTextAlignment(.center)
 
-                Text("Unplug helps you break doom-scrolling habits with smart, context-aware alternatives that actually feel better than the screen.")
+                Text(String(localized: "onboarding.welcome.description"))
                     .font(.unplugBody())
                     .foregroundStyle(UnplugTheme.Colors.textSecondary)
                     .multilineTextAlignment(.center)
@@ -26,7 +26,7 @@ struct WelcomeView: View {
 
             Spacer()
 
-            UnplugButton(title: "Get Started") {
+            UnplugButton(title: String(localized: "onboarding.welcome.button")) {
                 state.advance()
             }
             .padding(.horizontal, UnplugTheme.Spacing.lg)

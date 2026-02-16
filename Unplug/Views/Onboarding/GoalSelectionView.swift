@@ -7,10 +7,10 @@ struct GoalSelectionView: View {
     var body: some View {
         VStack(spacing: UnplugTheme.Spacing.lg) {
             VStack(spacing: UnplugTheme.Spacing.sm) {
-                Text("What's your goal?")
+                Text(String(localized: "onboarding.goals.title"))
                     .font(.unplugHeadline())
 
-                Text("Pick up to 3 goals you want to work toward instead of scrolling.")
+                Text(String(localized: "onboarding.goals.description"))
                     .font(.unplugBody())
                     .foregroundStyle(UnplugTheme.Colors.textSecondary)
                     .multilineTextAlignment(.center)
@@ -38,7 +38,7 @@ struct GoalSelectionView: View {
                     if showCustomGoalField {
                         HStack {
                             TextField(
-                                "Your own goal...",
+                                String(localized: "onboarding.goals.custom.placeholder"),
                                 text: Binding(
                                     get: { state.customGoal },
                                     set: { state.customGoal = $0 }
@@ -64,7 +64,7 @@ struct GoalSelectionView: View {
                         Button {
                             showCustomGoalField = true
                         } label: {
-                            Label("Add your own goal", systemImage: "plus.circle")
+                            Label(String(localized: "onboarding.goals.custom.add"), systemImage: "plus.circle")
                                 .font(.unplugCallout())
                                 .foregroundStyle(UnplugTheme.Colors.primarySage)
                         }
@@ -76,11 +76,11 @@ struct GoalSelectionView: View {
             Spacer()
 
             HStack(spacing: UnplugTheme.Spacing.sm) {
-                UnplugButton(title: "Back", style: .secondary) {
+                UnplugButton(title: String(localized: "button.back"), style: .secondary) {
                     state.goBack()
                 }
                 UnplugButton(
-                    title: "Next",
+                    title: String(localized: "button.next"),
                     isDisabled: !state.canProceed
                 ) {
                     state.advance()

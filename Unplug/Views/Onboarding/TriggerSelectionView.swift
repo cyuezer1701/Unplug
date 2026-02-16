@@ -11,10 +11,10 @@ struct TriggerSelectionView: View {
     var body: some View {
         VStack(spacing: UnplugTheme.Spacing.lg) {
             VStack(spacing: UnplugTheme.Spacing.sm) {
-                Text("Why do you scroll?")
+                Text(String(localized: "onboarding.triggers.title"))
                     .font(.unplugHeadline())
 
-                Text("Select the triggers that make you reach for your phone mindlessly.")
+                Text(String(localized: "onboarding.triggers.description"))
                     .font(.unplugBody())
                     .foregroundStyle(UnplugTheme.Colors.textSecondary)
                     .multilineTextAlignment(.center)
@@ -46,14 +46,14 @@ struct TriggerSelectionView: View {
 
             HStack(spacing: UnplugTheme.Spacing.sm) {
                 UnplugButton(
-                    title: "Back",
+                    title: String(localized: "button.back"),
                     style: .secondary
                 ) {
                     state.goBack()
                 }
 
                 UnplugButton(
-                    title: "Next",
+                    title: String(localized: "button.next"),
                     isDisabled: !state.canProceed
                 ) {
                     state.advance()
