@@ -14,20 +14,20 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         return ShieldConfiguration(
             backgroundBlurStyle: .systemUltraThinMaterial,
             title: ShieldConfiguration.Label(
-                text: "Time for a break!",
+                text: String(localized: "shield.title"),
                 color: sageGreen
             ),
             subtitle: ShieldConfiguration.Label(
-                text: "You've reached your \(limitMinutes)-minute limit. Try something different?",
+                text: String(localized: "shield.subtitle \(limitMinutes)"),
                 color: .secondaryLabel
             ),
             primaryButtonLabel: ShieldConfiguration.Label(
-                text: "Open Unplug",
+                text: String(localized: "shield.primaryButton"),
                 color: .white
             ),
             primaryButtonBackgroundColor: sageGreen,
             secondaryButtonLabel: ShieldConfiguration.Label(
-                text: "Dismiss",
+                text: String(localized: "shield.secondaryButton"),
                 color: .secondaryLabel
             )
         )

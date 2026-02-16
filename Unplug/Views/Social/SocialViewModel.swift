@@ -12,8 +12,8 @@ final class SocialViewModel {
     var showError = false
     var errorMessage = ""
 
-    func loadBuddies(userId: String) async {
-        isLoading = true
+    func loadBuddies(userId: String, showSkeleton: Bool = true) async {
+        if showSkeleton { isLoading = true }
         let firestoreService = FirestoreService()
         do {
             buddies = try await firestoreService.getBuddies(userId: userId)

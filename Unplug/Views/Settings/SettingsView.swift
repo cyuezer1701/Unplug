@@ -36,6 +36,14 @@ struct SettingsView: View {
                     }
                 }
 
+                Section(String(localized: "settings.about.section")) {
+                    NavigationLink {
+                        AboutView()
+                    } label: {
+                        Label(String(localized: "settings.about"), systemImage: "info.circle")
+                    }
+                }
+
                 Section(String(localized: "settings.account")) {
                     Button {
                         viewModel.showingSignOutConfirmation = true

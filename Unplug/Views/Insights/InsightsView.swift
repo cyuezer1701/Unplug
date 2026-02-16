@@ -47,6 +47,11 @@ struct InsightsView: View {
             }
             .navigationTitle(String(localized: "tab.insights"))
             .unplugBackground()
+            .refreshable {
+                guard let userId = appState.currentUser?.id else { return }
+                let firestoreService = FirestoreService()
+                await viewModel.loadInsights(userId: userId, firestoreService: firestoreService, showSkeleton: false)
+            }
             .task {
                 guard let userId = appState.currentUser?.id else { return }
                 let firestoreService = FirestoreService()

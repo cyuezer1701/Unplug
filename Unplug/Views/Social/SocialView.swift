@@ -22,6 +22,10 @@ struct SocialView: View {
             }
             .navigationTitle(String(localized: "tab.social"))
             .unplugBackground()
+            .refreshable {
+                guard let userId = appState.currentUser?.id else { return }
+                await viewModel.loadBuddies(userId: userId, showSkeleton: false)
+            }
             .task {
                 guard let userId = appState.currentUser?.id else { return }
                 await viewModel.loadBuddies(userId: userId)

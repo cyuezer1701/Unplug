@@ -190,6 +190,16 @@ struct HomeView: View {
             }
             .navigationTitle(String(localized: "tab.home"))
             .unplugBackground()
+            .refreshable {
+                guard let userId = appState.currentUser?.id else { return }
+                let firestoreService = FirestoreService()
+                await homeViewModel.loadDashboardData(
+                    userId: userId,
+                    firestoreService: firestoreService,
+                    appState: appState,
+                    showSkeleton: false
+                )
+            }
             .task {
                 guard let userId = appState.currentUser?.id else { return }
                 let firestoreService = FirestoreService()

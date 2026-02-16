@@ -32,9 +32,9 @@ final class HomeViewModel {
 
     private weak var appState: AppState?
 
-    func loadDashboardData(userId: String, firestoreService: FirestoreService, appState: AppState) async {
+    func loadDashboardData(userId: String, firestoreService: FirestoreService, appState: AppState, showSkeleton: Bool = true) async {
         self.appState = appState
-        isLoading = true
+        if showSkeleton { isLoading = true }
 
         async let sessionsTask = firestoreService.getTodaySessions(userId: userId)
         async let streakTask = firestoreService.getStreak(userId: userId, type: .checkIn)

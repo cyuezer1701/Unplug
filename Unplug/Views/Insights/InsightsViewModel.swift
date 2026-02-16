@@ -14,8 +14,8 @@ final class InsightsViewModel {
         !moodTrend.isEmpty || !triggerFrequency.isEmpty || weeklySessionCount > 0
     }
 
-    func loadInsights(userId: String, firestoreService: FirestoreService) async {
-        isLoading = true
+    func loadInsights(userId: String, firestoreService: FirestoreService, showSkeleton: Bool = true) async {
+        if showSkeleton { isLoading = true }
         let calendar = Calendar.current
         let now = Date.now
         guard let weekAgo = calendar.date(byAdding: .day, value: -7, to: now) else {
