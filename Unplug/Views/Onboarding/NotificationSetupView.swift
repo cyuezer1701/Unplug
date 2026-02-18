@@ -3,8 +3,6 @@ import SwiftUI
 struct NotificationSetupView: View {
     let state: OnboardingState
     let onComplete: () -> Void
-    @State private var isRequesting = false
-    private let notificationService = NotificationService()
 
     var body: some View {
         VStack(spacing: UnplugTheme.Spacing.xl) {
@@ -48,9 +46,9 @@ struct NotificationSetupView: View {
 
             VStack(spacing: UnplugTheme.Spacing.sm) {
                 UnplugButton(title: String(localized: "onboarding.notifications.enable")) {
-                    requestNotificationPermission()
+                    state.notificationsEnabled = true
+                    onComplete()
                 }
-                .disabled(isRequesting)
 
                 Button {
                     onComplete()
@@ -62,34 +60,6 @@ struct NotificationSetupView: View {
             }
             .padding(.horizontal, UnplugTheme.Spacing.lg)
             .padding(.bottom, UnplugTheme.Spacing.xxl)
-        }
-    }
-
-    private func requestNotificationPermission() {
-        isRequesting = true
-        Task {
-            let granted = (try? await notificationService.requestPermission()) ?? false
-            state.notificationsEnabled = granted
-
-            if granted {
-                try? await notificationService.scheduleDailyReminder(
-                    at: state.dailyCheckInTime,
-                    title: String(localized: "notification.reminder.title"),
-                    body: String(localized: "notification.reminder.body")
-                )
-                // Persist notification settings
-                UserPreferences.shared.notificationsEnabled = true
-                let components = Calendar.current.dateComponents(
-                    [.hour, .minute], from: state.dailyCheckInTime
-                )
-                UserPreferences.shared.reminderTimeHour = components.hour ?? 21
-                UserPreferences.shared.reminderTimeMinute = components.minute ?? 0
-            }
-
-            await MainActor.run {
-                isRequesting = false
-                onComplete()
-            }
         }
     }
 }

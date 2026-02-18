@@ -63,8 +63,28 @@ struct OnboardingContainerView: View {
             )
         }
 
-        // Save to Firestore (fire-and-forget)
-        Task {
+        // Request notification permission + save to Firestore (fire-and-forget)
+        let wantsNotifications = onboardingState.notificationsEnabled
+        let checkInTime = onboardingState.dailyCheckInTime
+        Task.detached {
+            // Notification permission (after view transition completes)
+            if wantsNotifications {
+                let notificationService = NotificationService()
+                let granted = (try? await notificationService.requestPermission()) ?? false
+                if granted {
+                    try? await notificationService.scheduleDailyReminder(
+                        at: checkInTime,
+                        title: String(localized: "notification.reminder.title"),
+                        body: String(localized: "notification.reminder.body")
+                    )
+                    UserPreferences.shared.notificationsEnabled = true
+                    let components = Calendar.current.dateComponents([.hour, .minute], from: checkInTime)
+                    UserPreferences.shared.reminderTimeHour = components.hour ?? 21
+                    UserPreferences.shared.reminderTimeMinute = components.minute ?? 0
+                }
+            }
+
+            // Save user to Firestore
             let firestoreService = FirestoreService()
             try? await firestoreService.createUser(user)
         }
