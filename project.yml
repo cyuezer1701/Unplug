@@ -103,7 +103,7 @@ targets:
         SKIP_INSTALL: YES
 
   UnplugWidget:
-    type: app-extension
+    type: extensionkit-extension
     platform: iOS
     sources:
       - path: UnplugWidget
