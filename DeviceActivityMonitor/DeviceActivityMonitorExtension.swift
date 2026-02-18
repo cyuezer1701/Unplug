@@ -32,17 +32,17 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
            ) {
             // Shield only the selected apps and categories
             if !selection.applicationTokens.isEmpty {
-                store.shield.applications = .specific(selection.applicationTokens)
+                store.shield.applications = selection.applicationTokens
             }
             if !selection.categoryTokens.isEmpty {
                 store.shield.applicationCategories = .specific(selection.categoryTokens)
             }
             if !selection.webDomainTokens.isEmpty {
-                store.shield.webDomains = .specific(selection.webDomainTokens)
+                store.shield.webDomains = selection.webDomainTokens
             }
         } else {
             // Fallback: shield all apps if no specific selection stored
-            store.shield.applications = .all()
+            store.shield.applicationCategories = .all()
         }
     }
 }

@@ -29,6 +29,10 @@ final class SettingsViewModel {
     func updateScrollLimit(_ minutes: Int) {
         scrollLimitMinutes = minutes
         UserPreferences.shared.dailyScrollLimitMinutes = minutes
+        let screenTimeService = ScreenTimeService()
+        if screenTimeService.isAuthorized {
+            try? screenTimeService.updateLimit(minutes: minutes)
+        }
     }
 
     func updateMonitoredApps(_ selection: FamilyActivitySelection) {

@@ -1,5 +1,6 @@
 import CoreLocation
 import Foundation
+import WeatherKit
 
 struct WeatherCondition: Sendable {
     var temperature: Double // Celsius
@@ -55,12 +56,18 @@ final class ContextService: NSObject, CLLocationManagerDelegate, @unchecked Send
         #endif
     }
 
-    private func fetchWeather(for _: CLLocation) async -> WeatherCondition? {
-        // WeatherKit requires Apple Developer Program + entitlement
-        // Graceful fallback: return nil if not available
-        // Full integration would use:
-        // let weather = try? await WeatherService.shared.weather(for: location)
-        return nil
+    private func fetchWeather(for location: CLLocation) async -> WeatherCondition? {
+        guard let weather = try? await WeatherService.shared.weather(for: location) else {
+            return nil
+        }
+        let current = weather.currentWeather
+        let condition = current.condition
+        return WeatherCondition(
+            temperature: current.temperature.converted(to: .celsius).value,
+            isRaining: condition == .rain || condition == .heavyRain || condition == .drizzle,
+            isSnowing: condition == .snow || condition == .heavySnow || condition == .flurries || condition == .blizzard,
+            windSpeed: current.wind.speed.converted(to: .metersPerSecond).value
+        )
     }
 
     // MARK: - CLLocationManagerDelegate

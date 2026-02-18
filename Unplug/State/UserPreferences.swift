@@ -76,4 +76,24 @@ final class UserPreferences: @unchecked Sendable {
         guard let selection = loadMonitoredAppsSelection() else { return false }
         return !selection.applicationTokens.isEmpty || !selection.categoryTokens.isEmpty
     }
+
+    // MARK: - Notification Settings
+
+    var notificationsEnabled: Bool {
+        get { defaults.bool(forKey: "notificationsEnabled") }
+        set { defaults.set(newValue, forKey: "notificationsEnabled") }
+    }
+
+    var reminderTimeHour: Int {
+        get {
+            let value = defaults.integer(forKey: "reminderTimeHour")
+            return defaults.object(forKey: "reminderTimeHour") != nil ? value : 20
+        }
+        set { defaults.set(newValue, forKey: "reminderTimeHour") }
+    }
+
+    var reminderTimeMinute: Int {
+        get { defaults.integer(forKey: "reminderTimeMinute") }
+        set { defaults.set(newValue, forKey: "reminderTimeMinute") }
+    }
 }

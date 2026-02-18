@@ -1,8 +1,14 @@
 import SwiftUI
+import UserNotifications
 
 struct NotificationSettingsView: View {
-    @State private var isEnabled = false
-    @State private var reminderTime = OnboardingState.defaultCheckInTime()
+    @State private var isEnabled = UserPreferences.shared.notificationsEnabled
+    @State private var reminderTime: Date = {
+        var components = DateComponents()
+        components.hour = UserPreferences.shared.reminderTimeHour
+        components.minute = UserPreferences.shared.reminderTimeMinute
+        return Calendar.current.date(from: components) ?? OnboardingState.defaultCheckInTime()
+    }()
     private let notificationService = NotificationService()
 
     var body: some View {
@@ -21,6 +27,7 @@ struct NotificationSettingsView: View {
                         displayedComponents: .hourAndMinute
                     )
                     .onChange(of: reminderTime) { _, newTime in
+                        persistReminderTime(newTime)
                         Task {
                             try? await notificationService.updateReminderTime(newTime)
                         }
@@ -31,9 +38,13 @@ struct NotificationSettingsView: View {
             }
         }
         .navigationTitle(String(localized: "settings.notifications"))
+        .task {
+            await checkSystemNotificationStatus()
+        }
     }
 
     private func handleToggle(_ enabled: Bool) {
+        UserPreferences.shared.notificationsEnabled = enabled
         if enabled {
             Task {
                 let granted = try? await notificationService.requestPermission()
@@ -45,10 +56,25 @@ struct NotificationSettingsView: View {
                     )
                 } else {
                     isEnabled = false
+                    UserPreferences.shared.notificationsEnabled = false
                 }
             }
         } else {
             notificationService.cancelAllReminders()
+        }
+    }
+
+    private func persistReminderTime(_ time: Date) {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: time)
+        UserPreferences.shared.reminderTimeHour = components.hour ?? 20
+        UserPreferences.shared.reminderTimeMinute = components.minute ?? 0
+    }
+
+    private func checkSystemNotificationStatus() async {
+        let settings = await UNUserNotificationCenter.current().notificationSettings()
+        if settings.authorizationStatus == .denied && isEnabled {
+            isEnabled = false
+            UserPreferences.shared.notificationsEnabled = false
         }
     }
 }

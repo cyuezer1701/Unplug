@@ -78,6 +78,16 @@ struct RootView: View {
                 )
             }
         }
+        // Restart Screen Time monitoring if previously authorized
+        if UserPreferences.shared.hasCompletedOnboarding {
+            let screenTimeService = ScreenTimeService()
+            if screenTimeService.isAuthorized {
+                try? screenTimeService.startMonitoring(
+                    limitMinutes: UserPreferences.shared.dailyScrollLimitMinutes
+                )
+            }
+        }
+
         appState.isLoading = false
     }
 }

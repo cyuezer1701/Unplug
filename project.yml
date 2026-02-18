@@ -45,6 +45,9 @@ targets:
         product: FirebaseAuth
       - package: Firebase
         product: FirebaseFirestore
+      - target: DeviceActivityMonitor
+      - target: ShieldConfiguration
+      - target: UnplugWidget
     scheme:
       testTargets:
         - UnplugTests
@@ -84,13 +87,8 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: io.unplug.app.device-activity-monitor
         CODE_SIGN_ENTITLEMENTS: DeviceActivityMonitor/DeviceActivityMonitor.entitlements
-        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_FILE: DeviceActivityMonitor/Info.plist
         SKIP_INSTALL: YES
-      configs:
-        debug:
-          INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.deviceactivity.monitor
-        release:
-          INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.deviceactivity.monitor
 
   ShieldConfiguration:
     type: app-extension
@@ -101,13 +99,8 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: io.unplug.app.shield-configuration
         CODE_SIGN_ENTITLEMENTS: ShieldConfiguration/ShieldConfiguration.entitlements
-        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_FILE: ShieldConfiguration/Info.plist
         SKIP_INSTALL: YES
-      configs:
-        debug:
-          INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.shieldconfiguration
-        release:
-          INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.shieldconfiguration
 
   UnplugWidget:
     type: app-extension
@@ -118,13 +111,8 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: io.unplug.app.widget
         CODE_SIGN_ENTITLEMENTS: UnplugWidget/UnplugWidget.entitlements
-        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_FILE: UnplugWidget/Info.plist
         SKIP_INSTALL: YES
-      configs:
-        debug:
-          INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.widgetkit-extension
-        release:
-          INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.widgetkit-extension
 
 schemes:
   Unplug:
